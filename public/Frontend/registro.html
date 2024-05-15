@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="es" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <script src="javaScript/signIn.js" defer></script>
+    <title>Anales de la ciencia</title>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div id="inicio" class="top">
+            <h1 style="font-family: 'spaceranger'; color: white;">Anales de la ciencia 𝛑</h1>
+        </div>
+        <div id="banner">
+            <h2>Registro</h2>
+        </div>
+    </header>
+
+    <!-- CUERPO DE LA PÁGINA -->
+    <div class="container-registro">
+        <p>
+            ¡Introduce los datos y podrás empezar a leer contenido!
+        </p>
+        <form class="form-center">
+            <input type="text" placeholder="Nombre" id="newUser" />
+            <input type="password" placeholder="Contraseña" id="newPass" />
+            <button type="submit" id="crearUsuario" onclick="crearUsuario()" style="margin: 15px 5px;">Crear</button>
+            <button type="button" class="btn-cancel-submit" id="volverUser">Cancelar y volver</button>
+        </form>
+    </div>
+
+    <div class="bottom">
+        <p>UPM ETSISI ©</p>
+        <img src="images/Flag_of_Extremadura,_Spain_(with_coat_of_arms).svg.png" alt="Imagen pequeña" class="imagenBottom">
+    </div>
+</body>
+</html>

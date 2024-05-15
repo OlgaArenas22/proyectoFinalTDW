@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <title>Anales de la ciencia</title>
+    <script src="javaScript/entidadesClass.js" defer></script>
+    <script src="javaScript/entidadesCrear.js" defer></script>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div id="inicio" class="top">
+            <h1 style="font-family: 'spaceranger'; color: white;">Anales de la ciencia 𝛑</h1>
+        </div>
+        <div id="banner">
+            <h2>Crear entidad</h2>
+        </div>
+    </header>
+
+    <!-- CUERPO DE LA PÁGINA -->
+    <div class="container-entidad">
+        <p class="formularios">Rellena los campos necesarios para crear la entidad.</p>
+        <form class="form-center">
+            <input type="text" placeholder="Nombre (*)" id="newEntity">
+            <p style="text-align:left; margin:10px 0 2px 0;">Fecha de creación: (*)</p>
+            <input type="date" placeholder="Fecha de creación" id="newStart">
+            <p style="text-align:left; margin:10px 0 2px 0;">Fecha de disolución:</p>
+            <input type="date" placeholder="Año de fin" id="newEnd">
+            <input type="text" placeholder="URL Wikipedia" id="newUrl">
+            <input type="text" placeholder="URL de la Imagen" id="newImage">
+            <label for="PersonasEntidad" style="text-align: left; font-family: 'Agency FB'; margin: 20px 0 0 0;">Relación Personas Entidad</label>
+            <select id="PersonasEntidad" multiple></select>
+            <button type="submit" id="crearEntidad" style="margin: 15px 5px;">Crear</button>
+            <button type="button" class="btn-cancel-submit" id="volverWriter">Cancelar y volver</button>
+        </form>
+    </div>
+    <div class="bottom">
+        <p>UPM ETSISI ©</p>
+        <img src="images/Flag_of_Extremadura,_Spain_(with_coat_of_arms).svg.png" alt="Imagen pequeña" class="imagenBottom">
+    </div>
+
+</body>
+</html>

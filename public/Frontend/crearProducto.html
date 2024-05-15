@@ -1,0 +1,47 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <title>Anales de la ciencia</title>
+    <script src="javaScript/productosClass.js" defer></script>
+    <script src="javaScript/productosCrear.js" defer></script>
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div id="inicio" class="top">
+            <h1 style="font-family: 'spaceranger'; color: white;">Anales de la ciencia 𝛑</h1>
+        </div>
+        <div id="banner">
+            <h2>Producto</h2>
+        </div>
+    </header>
+
+    <!-- CUERPO DE LA PÁGINA -->
+    <div class="container-producto">
+        <p class="formularios">Rellena los campos para crear un producto.</p>
+        <form class="form-center">
+            <input type="text" placeholder="Nombre (*)" id="newProducto" />
+            <p style="text-align:left; margin:10px 0 2px 0;">Fecha de creación (*)</p>
+            <input type="date" placeholder="Año de creación" id="newBirth" />
+            <p style="text-align:left; margin:10px 0 2px 0;">Fecha de obsolescencia</p>
+            <input type="date" placeholder="Año de obsolescencia" id="newDeath" />
+            <input type="text" placeholder="URL Wikipedia" id="newUrl" />
+            <input type="text" placeholder="URL de la Imagen" id="newImage" />
+            <label for="PersonasProducto" style="text-align: left; font-family: 'Agency FB'; margin: 20px 0 0 0;">Relación Personas-Producto</label>
+            <select id="PersonasProducto" multiple></select>
+            <label for="EntidadesProducto" style="text-align: left; font-family: 'Agency FB'; margin: 20px 0 0 0;">Relación Entidades-Producto</label>
+            <select id="EntidadesProducto" multiple></select>
+            <button type="submit" id="crearProducto" style="margin: 10px 5px;">Crear</button>
+            <button type="button" class="btn-cancel-submit" id="volverWriter">Cancelar y volver</button>
+        </form>
+    </div>
+
+    <div class="bottom">
+        <p>UPM ETSISI ©</p>
+        <img src="images/Flag_of_Extremadura,_Spain_(with_coat_of_arms).svg.png" alt="Imagen pequeña" class="imagenBottom">
+    </div>
+</body>
+</html>

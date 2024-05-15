@@ -1,0 +1,453 @@
+@font-face {
+    font-family: spaceranger;
+    src: url('../fonts/spaceranger.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: BebasNeue-Regular;
+    src: url('../fonts/BebasNeue-Regular.ttf') format('truetype');
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    height: 5%;
+    text-align: right;
+    margin: 0;
+}
+
+.top {
+    text-align: center;
+    padding: 10px;
+}
+
+.header-image {
+    background-image: url('../images/einstein.jpg');
+    background-size: 100% auto;
+    background-position: top;
+    padding: 200px;
+    height: 60%;
+    text-align: center;
+    margin-top: 0;
+}
+
+.imagenBottom {
+    border: 1px solid white;
+    float: right;
+    width: 35px; /* puedes ajustar el ancho según sea necesario */
+    height: 20px; /* auto para mantener la proporción de la imagen */
+    margin-left: 1050px; /* para agregar un poco de espacio entre la imagen y el texto */
+}
+
+.imagenMostrar{
+    width:170px;
+    height:150px;
+    border: 3px solid white;
+}
+
+.linkIndex {
+   font-size: 25px;
+   color:white;
+}
+
+.linkIndex:visited {
+    color: white;
+}
+
+.linkIndex:hover{
+    color: darkorange;
+}
+
+
+.imagenIndex {
+    margin-top: 1.5%;
+}
+
+.verPersonas {
+    display: flex;
+    margin-left: 8%;
+    margin-top: 6%;
+    margin-right: 8%;
+    margin-bottom: 2%;
+}
+
+.verPersonas, .imagenMostrar {
+    display: inline-block;
+}
+
+.verFecha, .verNombre{
+    display:flex;
+    color:white;
+    font-family:'Agency FB';
+}
+
+.verNombre{
+    font-size: 35px;
+}
+
+.div30 {
+    float: left;
+    width: 30%;
+}
+
+.div40 {
+    float:left;
+    width: 40%;
+}
+
+.verPersonas div {
+    display: inline-block;
+    vertical-align: top; /* Para alinear el texto con la imagen */
+}
+
+.wikipedia{
+    width: 525px;
+    height: 400px;
+}
+
+.inline-li li {
+    display: inline;
+}
+
+.form-inline {
+    display: inline-block;
+}
+
+.form-center {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    width: 400px;
+}
+
+input{
+    outline-color: orange;
+}
+
+input, select, buttom{
+    margin: 13px 0;
+}
+
+.formLabel {
+    margin: 5px 0 0 0;
+    text-align: left;
+    font-family: 'Agency FB';
+}
+
+input[type="text"],
+input[type="password"],
+input[type="button"] {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 5px;
+    border: none;
+}
+
+input[type="button"] {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    color: #fff;
+    cursor: pointer;
+}
+
+    input[type="button"]:hover {
+        background-color: #45a049;
+    }
+
+nav {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    font-family: Bahnschrift;
+    font-weight: bold;
+    color: white;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    margin: 0;
+    display: flex;
+    background-color: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 20px;
+    width: 100%;
+}
+
+
+
+
+
+select[multiple] {
+    width: 300px;
+    min-height: 50px;
+}
+
+label {
+    color: white;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    margin: 35px;
+}
+
+.header-menu {
+    display: flex;
+    justify-content: center;
+}
+
+.bottom {
+    display: flex;
+    height: 5%;
+    margin-left: 20px;
+    padding: 20px;
+}
+
+
+.formularios {
+    font-family:'Agency FB'; 
+    color:white; 
+    font-size: 20px; 
+    font-weight:bold;
+}
+
+.elementos {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-family: 'BebasNeue-Regular';
+    color: white;
+}
+
+.container {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    display: flex;
+    margin-top: 40px;
+    margin-left: 400px;
+    margin-right: 400px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 500px;
+    text-align: center;
+    border: none;
+    border-radius: 2px;
+}
+
+.container-registro {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    display: flex;
+    margin-top: 40px;
+    margin-left: 400px;
+    margin-right: 400px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 300px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+
+}
+
+.container-producto {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    display: flex;
+    margin-top: 60px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 700px;
+    padding: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.container-editProducto {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    display: flex;
+    margin-top: 60px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 770px;
+    padding: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.container-persona {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    display: flex;
+    margin-top: 60px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 430px;
+    padding: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.container-editPersona {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    display: flex;
+    margin-top: 60px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 570px;
+    padding: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.container-entidad {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    display: flex;
+    margin-top: 60px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 560px;
+    padding: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.container-editEntidad {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    display: flex;
+    margin-top: 60px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 670px;
+    padding: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+.container-eliminar {
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    display: flex;
+    margin-top: 60px;
+    margin-left: 400px;
+    margin-right: 400px;
+    margin-bottom: 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 200px;
+    padding: 5px;
+    text-align: center;
+    border: none;
+    border-radius: 10px;
+}
+
+select{
+    border:none;
+    border-radius: 5px;
+    height: 30px;
+    width: 250px;
+    outline:none;
+}
+
+
+.lista-elementos {
+    padding: 10px 20px;
+    border-style: solid;
+    border-color: white;
+}
+
+.cuerpo-pagina {
+    padding: 40px 100px;
+}
+
+p {
+    font-family: 'Agency FB';
+    color: white;
+}
+
+button {
+    width: 70px;
+    height: 23px;
+    margin: 0px 5px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    border: none;
+}
+
+    .login, .logout {
+        padding: 5px;
+        margin: 5px;
+        border-radius: 5px;
+        border: none;
+        background: linear-gradient(to bottom right, #800080, #9370DB);
+        color: #fff;
+        cursor: pointer;
+        width: 100px;
+        height: 25px;
+    }
+
+ button[type="submit"],button[type="button"], .btn-submit{
+    background: black;
+    width: 120px;
+ }
+
+.btn-cancel-submit {
+    background: black;
+    width: 120px;
+    height: 30px;
+}
+
+ button[type="edicion"]{
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+ }
+
+
+#productos, #entidades, #personas {
+    font-family: 'Agency FB';
+    color: white;
+}
+
+#banner {
+    text-align: center;
+    font-family: 'BebasNeue-Regular';
+    padding: 10px 20px;
+    background: linear-gradient(to bottom right, #800080, #9370DB);
+    color: white;
+}
