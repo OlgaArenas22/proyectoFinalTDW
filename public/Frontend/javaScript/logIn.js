@@ -1,11 +1,5 @@
-const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [
-    {user: "x", pass: "x", rol: "writer"},
-    {user: "y", pass: "y", rol: "writer"},
-    {user: "z", pass: "z", rol: "writer"},
-];
 
-
-function login() {
+async function login() {
     const user = document.getElementById("usuario").value;
     const pass = document.getElementById("contrasenia").value;
 
@@ -16,7 +10,7 @@ function login() {
 
     console.log(data)
 
-    fetch("http://127.0.0.1:8000/access_token", {
+    await fetch("/access_token", {
         //mode: 'no-cors',
         method: 'POST',
         //credentials: 'include',
@@ -27,15 +21,16 @@ function login() {
     })
         .then(response => {
             if (response.ok) {
-                window.location.href = "indexWriter.html";
+                console.log("response ok")
+                //window.location.href = "indexWriter.html";
             } else {
                 alert("Error en la solicitud");
             }
         });
 }
 
-function checkUser(){
-    login();
+async function checkUser(){
+    await login();
 }
 
 

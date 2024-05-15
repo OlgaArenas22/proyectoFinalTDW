@@ -15,7 +15,7 @@ return function (App $app) {
     // Redirection / -> /api-docs/index.html
     $app->redirect(
         '/',
-        '/api-docs/index.html'
+        '/Frontend/index.html'
     )->setName('tdw_home_redirect');
 
     /**

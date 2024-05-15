@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("crearUsuario").addEventListener("click", crearUsuario);
 
     document.getElementById("volverUser").addEventListener("click", function () {
