@@ -1,39 +1,24 @@
+this.loginButton = document.getElementById("loginButton");
 
-async function login() {
-    const user = document.getElementById("usuario").value;
-    const pass = document.getElementById("contrasenia").value;
+this.loginButton.addEventListener('click', async (event)=>{
+    event.preventDefault();
 
-    const data = {
-        "username": user,
-        "password": pass
-    };
-
-    console.log(data)
+    const form = document.getElementById("user");
+    const formData = new FormData(form)
 
     await fetch("/access_token", {
-        //mode: 'no-cors',
         method: 'POST',
-        //credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: data,
+        body: formData,
     })
         .then(response => {
+            console.log(response.ok)
             if (response.ok) {
-                console.log("response ok")
-                //window.location.href = "indexWriter.html";
+                window.location.href = "indexWriter.html";
             } else {
                 alert("Error en la solicitud");
             }
         });
-}
-
-async function checkUser(){
-    await login();
-}
-
-
+});
 
 
 

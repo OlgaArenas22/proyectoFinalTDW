@@ -6,13 +6,7 @@
     <link rel="stylesheet" href="CSS/styles.css">
     <title>Anales de la ciencia</title>
     <script src="javaScript/logIn.js" defer></script>
-    <script src="javaScript/personasClass.js" defer></script>
-    <script src="javaScript/personasMostrar.js" defer></script>
-    <script src="javaScript/entidadesClass.js" defer></script>
-    <script src="javaScript/entidadesMostrar.js" defer></script>
-    <script src="javaScript/productosClass.js" defer></script>
-    <script src="javaScript/productosMostrar.js" defer></script>
-    <script src="javaScript/redirects.js" defer></script>
+
 </head>
 
 <body>
@@ -21,9 +15,9 @@
         <div id="inicio" class="header-top">
             <h1 style="margin-right: auto; font-family: 'spaceranger'; color: white; margin-left: 30px;">Anales de la ciencia 𝛑</h1>
             <form id="user" class="form-inline">
-                <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
-                <input type="password" id="contrasenia" name="contrasenia" placeholder="Contraseña" required>
-                <button class="login" onclick="checkUser()">Iniciar sesión</button>
+                <input type="text" id="usuario" name="username" placeholder="Usuario" required>
+                <input type="password" id="contrasenia" name="password" placeholder="Contraseña" required>
+                <button type="submit" id="loginButton" class="login">Iniciar sesión</button>
                 <button class="login" onclick="redirectsRegistro()">Registrarse</button>
             </form>
         </div>
