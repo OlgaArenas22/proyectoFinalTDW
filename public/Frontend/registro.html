@@ -24,10 +24,11 @@
         <p>
             ¡Introduce los datos y podrás empezar a leer contenido!
         </p>
-        <form class="form-center">
-            <input type="text" placeholder="Nombre" id="newUser" />
-            <input type="password" placeholder="Contraseña" id="newPass" />
-            <button type="submit" id="crearUsuario" onclick="crearUsuario()" style="margin: 15px 5px;">Crear</button>
+        <form id="createUser" class="form-center">
+            <input type="text" placeholder="Nombre" name="username" />
+            <input type="email" placeholder="Email" name="email" />
+            <input type="password" placeholder="Contraseña" name="password" />
+            <button type="submit" id="crearUsuario" style="margin: 15px 5px;">Crear</button>
             <button type="button" class="btn-cancel-submit" id="volverUser">Cancelar y volver</button>
         </form>
     </div>
