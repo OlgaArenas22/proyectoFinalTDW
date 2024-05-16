@@ -1,73 +1,38 @@
-document.addEventListener("DOMContentLoaded", function () {
-    mostrarListaPersonas();
-
-})
-
-function mostrarListaPersonas() {
-    const personas = JSON.parse(localStorage.getItem("personas")) || [];
+document.addEventListener("DOMContentLoaded", async () => {
     const contenedorPersonas = document.getElementById("lista-personas");
     contenedorPersonas.innerHTML = "";
 
-    personas.forEach(function (persona, index) {
-        //const dataPersona = JSON.stringify(persona);
-        const personaElemento = document.createElement("div");
-        if (persona.imagen === "") {
-            if (persona.defuncion == '') {
-                personaElemento.innerHTML = `
-                <a href="personasMostrar.html" onclick="llamarFuncionPersona(${index})" data-persona="${index}" class="linkIndex"><strong>${index + 1}: ${persona.nombre}</strong></a>
-                <br>
-                <img src="images/sinLogo.jpg" width="120" height="120" class="imagenIndex">
-                <p>${persona.nacimiento} - Actualidad</p>
-                <hr>
-              `;
-            } else {
-                personaElemento.innerHTML = `
-                <a href="personasMostrar.html" onclick="llamarFuncionPersona(${index})" data-persona="${index}" style="font-size: 25px;"><strong>${index + 1}: ${persona.nombre}</strong></a>
-                <br>
-                <img src="images/sinLogo.jpg" width="120" height="120" class="imagenIndex"">
-                <p>${persona.nacimiento} - ${persona.defuncion}</p>
-                <hr>
-              `;
-            }
-        } else {
-            if (persona.defuncion === '') {
-                personaElemento.innerHTML = `
-                <a href="personasMostrar.html" onclick="llamarFuncionPersona(${index})" data-persona="${index}" class="linkIndex"><strong>${index + 1}: ${persona.nombre}</strong></a>
-                <br>
-                <img src="${persona.imagen}" width="120" height="120" class="imagenIndex">
-                <p>${persona.nacimiento} - Actualidad </p>
-                <hr>
-                `;
-            } else {
-                personaElemento.innerHTML = `
-                <a href="personasMostrar.html" onclick="llamarFuncionPersona(${index})" data-persona="${index}" class="linkIndex"><strong>${index + 1}: ${persona.nombre}</strong></a>
-                <br>
-                <img src="${persona.imagen}" width="120" height="120" class="imagenIndex">
-                <p>${persona.nacimiento} - ${persona.defuncion}</p>
-                <hr>
-                `;
-            }
+    try {
+        const response = await fetch("/api/v1/persons");
 
+        if (!response.ok) {
+            console.log("No hay personas");
+            return;
         }
-        contenedorPersonas.appendChild(personaElemento);
-    });
-}
 
-function llamarFuncionPersona(index){
-    const personas = JSON.parse(localStorage.getItem("personas")) || [];
-    const persona = personas[index];
-    almacenarPersona(persona);
-}
+        const data = await response.json();
 
-function almacenarPersona(persona){
-    sessionStorage.setItem('personasVer', JSON.stringify(persona));
-}
+        data.persons.forEach(personObj => {
+            const person = personObj.person;
+            const personaElemento = document.createElement("div");
 
+            let imageUrl = person.imageUrl ? person.imageUrl : "images/sinLogo.jpg";
+            let deathDate = person.deathDate ? person.deathDate : "Actualidad";
 
+            personaElemento.innerHTML = `
+                <strong>${person.id}: ${person.name}</strong>
+                <br>
+                <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
+                <p>${person.birthDate} - ${deathDate}</p>
+                <hr>
+            `;
 
-
-
-
+            contenedorPersonas.appendChild(personaElemento);
+        });
+    } catch (error) {
+        console.error("Error fetching persons:", error);
+    }
+});
 
 
 
