@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     contenedorPersonas.innerHTML = "";
 
     try {
-        const response = await fetch("/api/v1/persons");
+        const response = await fetch("http://127.0.0.1:8000/api/v1/persons");
 
         if (!response.ok) {
             console.log("No hay personas");

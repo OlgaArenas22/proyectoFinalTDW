@@ -1,64 +1,42 @@
-document.addEventListener("DOMContentLoaded", function () {
-    mostrarListaProductos();
-})
-
-function mostrarListaProductos() {
-    const productos = JSON.parse(localStorage.getItem("productos")) || [];
+document.addEventListener("DOMContentLoaded", async () => {
     const contenedorProductos = document.getElementById("lista-productos");
     contenedorProductos.innerHTML = "";
 
-    productos.forEach(function (producto, index) {
-        const productoElemento = document.createElement("div");
-        if (producto.imagen === "") {
-            if (producto.extincion === '') {
-                productoElemento.innerHTML = `
-            <a href="productosMostrar.html" onclick="llamarFuncionProducto(${index})" class="linkIndex"><strong>${index + 1}: ${producto.nombre}</strong></a>
-            <br>
-            <img src="images/sinLogo.jpg" width="120" height="120" class="imagenIndex">
-            <p>${producto.creacion} - Actualidad</p>
-            <hr>
-          `;
-            } else {
-                productoElemento.innerHTML = `
-            <a href="productosMostrar.html" onclick="llamarFuncionProducto(${index})" class="linkIndex"><strong>${index + 1}: ${producto.nombre}</strong></a>
-            <br>
-            <img src="images/sinLogo.jpg" width="120" height="120" class="imagenIndex">
-            <p>${producto.creacion} - ${producto.extincion}</p>
-            <hr>
-          `;
-            }
-        } else {
-            if (producto.extincion === '') {
-                productoElemento.innerHTML = `
-            <a href="productosMostrar.html" onclick="llamarFuncionProducto(${index})" class="linkIndex"><strong>${index + 1}: ${producto.nombre}</strong></a>
-            <br>
-            <img src="${producto.imagen}" width="120" height="120" class="imagenIndex">
-            <p>${producto.creacion} - Actualidad</p>
-            <hr>
-          `;
-            } else {
-                productoElemento.innerHTML = `
-            <a href="productosMostrar.html" onclick="llamarFuncionProducto(${index})" class="linkIndex"><strong>${index + 1}: ${producto.nombre}</strong></a>
-            <br>
-            <img src="${producto.imagen}" width="120" height="120" class="imagenIndex">
-            <p>${producto.creacion} - ${producto.extincion}</p>
-            <hr>
-          `;
-            }
+    try {
+        const response = await fetch("http://127.0.0.1:8000/api/v1/products");
+
+        if (!response.ok) {
+            console.log("No hay productos");
+            return;
         }
-        contenedorProductos.appendChild(productoElemento);
-    });
-}
 
-function llamarFuncionProducto(index){
-    const productos = JSON.parse(localStorage.getItem("productos")) || [];
-    const producto = productos[index];
-    almacenarProducto(producto);
-}
+        const data = await response.json();
 
-function almacenarProducto(producto){
-    sessionStorage.setItem('productosVer', JSON.stringify(producto));
-}
+        data.products.forEach(productObj => {
+            const product = productObj.product;
+            const productoElemento = document.createElement("div");
+
+            let imageUrl = product.imageUrl ? product.imageUrl : "images/sinLogo.jpg";
+            let deathDate = product.deathDate ? product.deathDate : "Actualidad";
+
+            productoElemento.innerHTML = `
+                <strong>${product.id}: ${product.name}</strong>
+                <br>
+                <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
+                <p>${product.birthDate} - ${deathDate}</p>
+                <hr>
+            `;
+
+            contenedorProductos.appendChild(productoElemento);
+        });
+    } catch (error) {
+        console.error("Error fetching products:", error);
+    }
+});
+
+
+
+
 
 
 
