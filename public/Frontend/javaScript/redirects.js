@@ -40,5 +40,6 @@ function redirectsRegistro(){
 }
 
 function redirectsIndex(){
+    sessionStorage.removeItem('access_token');
     window.location.href = "index.html";
 }

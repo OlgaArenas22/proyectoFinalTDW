@@ -32,6 +32,7 @@ this.loginButton.addEventListener('click', async (event)=>{
             return;
         }
 
+
         const usersData = await usersResponse.json();
         let id = -1;
         let encontrado = false;
@@ -49,7 +50,7 @@ this.loginButton.addEventListener('click', async (event)=>{
             return;
         }
         if (usersData.users[id].user.role === "WRITER") {
-            console.log("hola");
+            sessionStorage.setItem('access_token', token);
             window.location.href = "indexWriter.html";
         } else {
             window.location.href = "indexReader.html";
