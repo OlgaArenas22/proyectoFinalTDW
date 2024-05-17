@@ -1,66 +1,42 @@
-document.addEventListener("DOMContentLoaded", function () {
-    mostrarListaEntidades();
-})
-
-function mostrarListaEntidades() {
-    const entidades = JSON.parse(localStorage.getItem("entidades")) || [];
+document.addEventListener("DOMContentLoaded", async () => {
     const contenedorEntidades = document.getElementById("lista-entidades");
     contenedorEntidades.innerHTML = "";
 
-    entidades.forEach(function (entidad, index) {
-        const entidadElemento = document.createElement("div");
-        if (entidad.imagen === "") {
-            if (entidad.final == '') {
-                entidadElemento.innerHTML = `
-            <a href="entidadesMostrar.html" onclick="llamarFuncionEntidades(${index})" class="linkIndex"><strong>${index + 1}: ${entidad.nombre}</strong></a>
-                <br>
-                <img src="images/sinLogo.jpg" width="120" height="120" class="imagenIndex">
-                <p>${entidad.inicio} - Actualidad</p>
-                <hr>
-              `;
-            } else {
-                entidadElemento.innerHTML = `
-            <a href="entidadesMostrar.html" onclick="llamarFuncionEntidades(${index})" class="linkIndex"><strong>${index + 1}: ${entidad.nombre}</strong></a>
-                <br>
-                <img src="images/sinLogo.jpg" width="120" height="120" class="imagenIndex">
-                <p>${entidad.inicio} - ${entidad.final}</p>
-                <hr>
-              `;
-            }
+    try {
+        const response = await fetch("http://127.0.0.1:8000/api/v1/entities");
 
-        } else {
-            if (entidad.final == '') {
-                entidadElemento.innerHTML = `
-            <a href="entidadesMostrar.html" onclick="llamarFuncionEntidades(${index})" class="linkIndex"><strong>${index + 1}: ${entidad.nombre}</strong></a>
-                <br>
-                <img src="${entidad.imagen}" width="120" height="120" class="imagenIndex">
-                <p>${entidad.inicio} - Actualidad</p>
-                <hr>
-              `;
-            } else {
-                entidadElemento.innerHTML = `
-            <a href="entidadesMostrar.html" onclick="llamarFuncionEntidades(${index})" class="linkIndex"><strong>${index + 1}: ${entidad.nombre}</strong></a>
-                <br>
-                <img src="${entidad.imagen}" width="120" height="120" class="imagenIndex">
-                <p>${entidad.inicio} - ${entidad.final}</p>
-                <hr>
-                `;
-            }
+        if (!response.ok) {
+            console.log("No hay entidades");
+            return;
         }
-        contenedorEntidades.appendChild(entidadElemento);
-    });
-}
+
+        const data = await response.json();
+
+        data.entities.forEach(entityObj => {
+            const entity = entityObj.entity;
+            const entidadElemento = document.createElement("div");
+
+            let imageUrl = entity.imageUrl ? entity.imageUrl : "images/sinLogo.jpg";
+            let deathDate = entity.deathDate ? entity.deathDate : "Actualidad";
+
+            entidadElemento.innerHTML = `
+                <strong>${entity.id}: ${entity.name}</strong>
+                <br>
+                <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
+                <p>${entity.birthDate} - ${deathDate}</p>
+                <hr>
+            `;
+
+            contenedorEntidades.appendChild(entidadElemento);
+        });
+    } catch (error) {
+        console.error("Error fetching entities:", error);
+    }
+});
 
 
-function llamarFuncionEntidades(index) {
-    const entidades = JSON.parse(localStorage.getItem("entidades")) || [];
-    const entidad = entidades[index];
-    almacenarEntidad(entidad);
-}
 
-function almacenarEntidad(entidad) {
-    sessionStorage.setItem('entidadesVer', JSON.stringify(entidad));
-}
+
 
 
 
