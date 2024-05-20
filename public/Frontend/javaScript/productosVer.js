@@ -3,9 +3,13 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(producto);
     document.getElementById("productoImagen").src = producto.imageUrl;
     document.getElementById("productoNombre").textContent = producto.name;
-    document.getElementById("productoCreacion").textContent = `Creación: ${producto.creacion}`;
-    document.getElementById("productoObsolescencia").textContent = `Defunción: ${producto.extincion}`;
-    document.getElementById("wikipedia").src = producto.url;
+    document.getElementById("productoCreacion").textContent = `Creación: ${producto.birthDate}`;
+    document.getElementById("productoObsolescencia").textContent = `Defunción: ${producto.deathDate}`;
+    if(producto.wikiUrl === null || producto.wikiUrl === ""){
+        document.getElementById("wikipedia").src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUzzTNcjuqNynQaX1mu0n_uyJp6-LjgbTqoWCrZzrqFw&s";
+    }else{
+        document.getElementById("wikipedia").src = producto.wikiUrl;
+    }
 
     mostrarProductoPersonas(producto);
     mostrarProductEntidades(producto)

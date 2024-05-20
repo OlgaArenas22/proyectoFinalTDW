@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             let deathDate = product.deathDate ? product.deathDate : "Actualidad";
 
             productoElemento.innerHTML = `
-                <a href="productosMostrar.html" onclick="llamarFuncionProducto(${product.id})" data-producto="${product.id}" class="linkIndex"><strong>${product.id}: ${product.name}</strong></a>
+                <a href="productosMostrar.html" class="linkIndex" data-producto="${product.id}"><strong>${product.id}: ${product.name}</strong></a>
                 <br>
                 <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
                 <p>${product.birthDate} - ${deathDate}</p>
@@ -29,37 +29,39 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             contenedorProductos.appendChild(productoElemento);
         });
+
+        // Agregar event listener a los enlaces después de que se han agregado al DOM
+        document.querySelectorAll('.linkIndex').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault(); // Evitar que se siga el enlace
+                const productId = this.getAttribute('data-producto');
+                llamarFuncionProducto(productId).then(() => {
+                    // Redirigir a la página después de que se complete la función
+                    window.location.href = 'productosMostrar.html';
+                });
+            });
+        });
     } catch (error) {
         console.error("Error fetching products:", error);
     }
 });
 
-async function llamarFuncionProducto(index){
+async function llamarFuncionProducto(index) {
     const token = sessionStorage.getItem("access_token");
-    const response = await fetch(`http://127.0.0.1:8000/api/v1/products/${index}`,{
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/api/v1/products/${index}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+        if (response.ok) {
+            const product = await response.json();
+            sessionStorage.setItem('productosVer', JSON.stringify(product.product));
+        } else {
+            console.error('Error fetching product:', response.statusText);
         }
-    })
-    const product = data.products[index];
-    alert(product);
-    sessionStorage.setItem('productosVer', product);
-
+    } catch (error) {
+        console.error("Error fetching product:", error);
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
