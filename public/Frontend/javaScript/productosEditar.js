@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         vaciaElemento(document.getElementById("EntidadesProducto"));
 
 
-        // Rellenar el formulario con la información del producto seleccionado
+        // Rellenar el formulario con la informaciï¿½n del producto seleccionado
         document.getElementById('productName').value = opcionSeleccionada.nombre;
         document.getElementById('productCreation').value = opcionSeleccionada.creacion;
         document.getElementById('productExtinction').value = opcionSeleccionada.extincion;
@@ -87,12 +87,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             opcion.textContent = persona.nombre;
 
-            // Marcar la opción como seleccionada si está en el array personasSeleccionadas
+            // Marcar la opciï¿½n como seleccionada si estï¿½ en el array personasSeleccionadas
             if (personasSeleccionadas.includes(persona.nombre)) {
                 opcion.selected = true;
             }
 
-            // Agregar la opción al elemento select
+            // Agregar la opciï¿½n al elemento select
             elemento.appendChild(opcion);
         }
     }
@@ -121,12 +121,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             opcion.textContent = entidad.nombre;
 
-            // Marcar la opción como seleccionada si está en el array personasSeleccionadas
+            // Marcar la opciï¿½n como seleccionada si estï¿½ en el array personasSeleccionadas
             if (personasSeleccionadas.includes(entidad.nombre)) {
                 opcion.selected = true;
             }
 
-            // Agregar la opción al elemento select
+            // Agregar la opciï¿½n al elemento select
             elemento.appendChild(opcion);
         }
     }

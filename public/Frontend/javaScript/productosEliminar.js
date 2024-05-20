@@ -5,17 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "indexWriter.html";
     });
 
+    obtenerDesplegable();
     const select = document.getElementById('productSelect');
-    const productos = JSON.parse(localStorage.getItem("productos")) || []
-
-    productos.forEach(producto => {
-        const option = document.createElement('option');
-        option.value = producto.id;
-        option.textContent = producto.nombre;
-        select.appendChild(option);
-    });
-
-
     // Escuchar el evento change del select
     select.addEventListener('change', function () {
         // Si se selecciona una opcion diferente de "selecionaUnProducto" se habilita el boton
@@ -26,23 +17,38 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Escuchar el evento submit del formulario
-    document.getElementById('deleteButton').addEventListener('click', function (event) {
-        const nuevosProductos = eliminaProducto(select.selectedIndex - 1)
-        actualizaStorage(nuevosProductos);
 
-        alert("producto eliminado")
-        event.preventDefault();
-        document.location.href = "indexWriter.html";
+    // Escuchar el evento submit del formulario
+    document.getElementById('deleteButton').addEventListener('click', async function (event) {
+        const token = sessionStorage.getItem("access_token");
+        const select = document.getElementById('productSelect');
+        const respuestas = select.selectedOptions;
+        await fetch(`http://127.0.0.1:8000/api/v1/products/${respuestas[0].value}`,{
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+
+        alert("Producto eliminado")
+        window.location.href = "indexWriter.html";
     });
 
-    function eliminaProducto(indiceAEliminar){
-        return [...productos.slice(0,indiceAEliminar), ...productos.slice(indiceAEliminar+=1, productos.lenght)]
-    }
 })
 
+async function obtenerDesplegable(){
+    const select = document.getElementById('productSelect');
+    const response = await fetch("http://127.0.0.1:8000/api/v1/products",{
 
+    });
 
-function actualizaStorage(productos) {
-    localStorage.setItem('productos', JSON.stringify(productos));
+    const data = await response.json();
+    const productos = data.products;
+
+    for(let i = 0; i <= productos.length; i++){
+        const option = document.createElement('option');
+        option.value = productos[i].product.id;
+        option.text = productos[i].product.name;
+        select.appendChild(option);
+    }
 }
