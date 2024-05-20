@@ -934,7 +934,7 @@ paths:
             Allow:
               $ref: '#/components/headers/Allow'
 
-  '/persons/PersonName/{PersonName}':
+  '/persons/personname/{personname}':
     get:
       tags:
         - '🧑🏻‍🤝‍🧑 Persons'
@@ -1185,7 +1185,7 @@ paths:
             Allow:
               $ref: '#/components/headers/Allow'
 
-  '/entities/EntityName/{EntityName}':
+  '/entities/entityname/{entityname}':
     get:
       tags:
         - '🏛️ Entities'
@@ -1747,7 +1747,7 @@ components:
         type: string
         pattern: '^[a-zA-Z0-9()áéíóúÁÉÍÓÚñÑ %$\.+-]+$'
     entityName:
-      name: entityName
+      name: entityname
       in: path
       description: Entity name
       required: true

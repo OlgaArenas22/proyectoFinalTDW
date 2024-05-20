@@ -21,14 +21,14 @@
     <!-- CUERPO DE LA PÁGINA -->
     <div class="container-producto">
         <p class="formularios">Rellena los campos para crear un producto.</p>
-        <form class="form-center">
-            <input type="text" placeholder="Nombre (*)" id="newProducto" />
+        <form id="producto" class="form-center">
+            <input type="text" name="name" placeholder="Nombre (*)" id="newProducto" />
             <p style="text-align:left; margin:10px 0 2px 0;">Fecha de creación (*)</p>
-            <input type="date" placeholder="Año de creación" id="newBirth" />
+            <input type="date" name="birthDate" placeholder="Año de creación" id="newBirth" />
             <p style="text-align:left; margin:10px 0 2px 0;">Fecha de obsolescencia</p>
-            <input type="date" placeholder="Año de obsolescencia" id="newDeath" />
-            <input type="text" placeholder="URL Wikipedia" id="newUrl" />
-            <input type="text" placeholder="URL de la Imagen" id="newImage" />
+            <input type="date" name="deathDate" placeholder="Año de obsolescencia" id="newDeath" />
+            <input type="text" name="imageUrl" placeholder="URL Wikipedia" id="newUrl" />
+            <input type="text" name="wikiUrl" placeholder="URL de la Imagen" id="newImage" />
             <label for="PersonasProducto" style="text-align: left; font-family: 'Agency FB'; margin: 20px 0 0 0;">Relación Personas-Producto</label>
             <select id="PersonasProducto" multiple></select>
             <label for="EntidadesProducto" style="text-align: left; font-family: 'Agency FB'; margin: 20px 0 0 0;">Relación Entidades-Producto</label>
