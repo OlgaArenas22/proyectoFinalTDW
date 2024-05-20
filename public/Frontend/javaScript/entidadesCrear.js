@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const data = await response.json();
             takePersonas(data.entity.id);
-            takeProductos(data.entity.id);
+            //takeProductos(data.entity.id);
             alert("Entidad creada");
 
         } catch (error) {
@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     buildPersonas();
-    buildProducts();
+    //buildProducts();
 });
 
 async function buildPersonas() {

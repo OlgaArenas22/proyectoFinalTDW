@@ -5,20 +5,11 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "indexWriter.html";
     });
 
+    obtenerDesplegable();
     const select = document.getElementById('entitySelect');
-    const entidades = JSON.parse(localStorage.getItem("entidades")) || []
-
-    entidades.forEach(producto => {
-        const option = document.createElement('option');
-        option.value = producto.id;
-        option.textContent = producto.nombre;
-        select.appendChild(option);
-    });
-
-
     // Escuchar el evento change del select
     select.addEventListener('change', function () {
-        // Si se selecciona una opcion diferente de "selecionaUnProducto" se habilita el boton
+        // Si se selecciona una opcion diferente de "selecionaUnaEntidad" se habilita el boton
         if(select.selectedIndex > 0){
             document.getElementById("deleteButton").disabled = false;
         }else{
@@ -26,23 +17,38 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Escuchar el evento submit del formulario
-    document.getElementById('deleteButton').addEventListener('click', function (event) {
-        const nuevasEntidades = eliminaEntidad(select.selectedIndex - 1)
-        actualizaStorage(nuevasEntidades);
 
-        alert("Entidad eliminado");
-        event.preventDefault();
-        document.location.href = "indexWriter.html";
+    // Escuchar el evento submit del formulario
+    document.getElementById('deleteButton').addEventListener('click', async function (event) {
+        const token = sessionStorage.getItem("access_token");
+        const select = document.getElementById('entitySelect');
+        const respuestas = select.selectedOptions;
+        await fetch(`http://127.0.0.1:8000/api/v1/entities/${respuestas[0].value}`,{
+            method: 'DELETE',
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+
+        alert("Entidad eliminada")
+        window.location.href = "eliminarEntidad.html";
     });
 
-    function eliminaEntidad(indiceAEliminar){
-        return [...entidades.slice(0,indiceAEliminar), ...entidades.slice(indiceAEliminar+=1, entidades.lenght)]
-    }
 })
 
+async function obtenerDesplegable(){
+    const select = document.getElementById('entitySelect');
+    const response = await fetch("http://127.0.0.1:8000/api/v1/entities",{
 
+    });
 
-function actualizaStorage(entidades) {
-    localStorage.setItem('entidades', JSON.stringify(entidades));
+    const data = await response.json();
+    const entidades = data.entities;
+
+    for(let i = 0; i <= entidades.length; i++){
+        const option = document.createElement('option');
+        option.value = entidades[i].entity.id;
+        option.text = entidades[i].entity.name;
+        select.appendChild(option);
+    }
 }

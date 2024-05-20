@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         })
 
         alert("Producto eliminado")
-        window.location.href = "indexWriter.html";
+        window.location.href = "eliminarProducto.html";
     });
 
 })
