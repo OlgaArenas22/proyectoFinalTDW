@@ -1,8 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     const producto = obtenerProducto();
-
-    document.getElementById("productoImagen").src = producto.imagen;
-    document.getElementById("productoNombre").textContent = producto.nombre;
+    console.log(producto);
+    document.getElementById("productoImagen").src = producto.imageUrl;
+    document.getElementById("productoNombre").textContent = producto.name;
     document.getElementById("productoCreacion").textContent = `Creación: ${producto.creacion}`;
     document.getElementById("productoObsolescencia").textContent = `Defunción: ${producto.extincion}`;
     document.getElementById("wikipedia").src = producto.url;

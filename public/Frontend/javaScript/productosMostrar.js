@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             let deathDate = product.deathDate ? product.deathDate : "Actualidad";
 
             productoElemento.innerHTML = `
-                <strong>${product.id}: ${product.name}</strong>
+                <a href="productosMostrar.html" onclick="llamarFuncionProducto(${product.id})" data-producto="${product.id}" class="linkIndex"><strong>${product.id}: ${product.name}</strong></a>
                 <br>
                 <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
                 <p>${product.birthDate} - ${deathDate}</p>
@@ -33,6 +33,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Error fetching products:", error);
     }
 });
+
+async function llamarFuncionProducto(index){
+    const token = sessionStorage.getItem("access_token");
+    const response = await fetch(`http://127.0.0.1:8000/api/v1/products/${index}`,{
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    const product = data.products[index];
+    alert(product);
+    sessionStorage.setItem('productosVer', product);
+
+}
 
 
 
