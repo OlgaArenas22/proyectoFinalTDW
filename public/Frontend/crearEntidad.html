@@ -21,16 +21,18 @@
     <!-- CUERPO DE LA PÁGINA -->
     <div class="container-entidad">
         <p class="formularios">Rellena los campos necesarios para crear la entidad.</p>
-        <form class="form-center">
-            <input type="text" placeholder="Nombre (*)" id="newEntity">
+        <form id="entidad" class="form-center">
+            <input type="text" name="name" placeholder="Nombre (*)" id="newEntity">
             <p style="text-align:left; margin:10px 0 2px 0;">Fecha de creación: (*)</p>
-            <input type="date" placeholder="Fecha de creación" id="newStart">
+            <input type="date" name="birthDate" placeholder="Fecha de creación" id="newStart">
             <p style="text-align:left; margin:10px 0 2px 0;">Fecha de disolución:</p>
-            <input type="date" placeholder="Año de fin" id="newEnd">
-            <input type="text" placeholder="URL Wikipedia" id="newUrl">
-            <input type="text" placeholder="URL de la Imagen" id="newImage">
+            <input type="date" name="deathDate" placeholder="Año de fin" id="newEnd">
+            <input type="text" name="imageUrl" placeholder="URL Wikipedia" id="newUrl">
+            <input type="text" name="wikiUrl" placeholder="URL de la Imagen" id="newImage">
             <label for="PersonasEntidad" style="text-align: left; font-family: 'Agency FB'; margin: 20px 0 0 0;">Relación Personas Entidad</label>
             <select id="PersonasEntidad" multiple></select>
+            <label for="ProductosEntidad" style="text-align: left; font-family: 'Agency FB'; margin: 20px 0 0 0;">Relación Productos Entidad</label>
+            <select id="ProductosEntidad" multiple></select>
             <button type="submit" id="crearEntidad" style="margin: 15px 5px;">Crear</button>
             <button type="button" class="btn-cancel-submit" id="volverWriter">Cancelar y volver</button>
         </form>
