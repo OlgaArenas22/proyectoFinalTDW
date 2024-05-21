@@ -1,10 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
     const entidad = obtenerEntidad();
-    document.getElementById("entidadImagen").src = entidad.imagen;
-    document.getElementById("entidadNombre").textContent = entidad.nombre;
-    document.getElementById("entidadCreacion").textContent = `Creación: ${entidad.inicio}`;
-    document.getElementById("entidadDisolucion").textContent = `Disolución: ${entidad.final}`;
-    document.getElementById("wikipedia").src = entidad.url;
+    document.getElementById("entidadImagen").src = entidad.imageUrl;
+    document.getElementById("entidadNombre").textContent = entidad.name;
+    document.getElementById("entidadCreacion").textContent = `Creaciï¿½n: ${entidad.birthDate}`;
+    document.getElementById("entidadDisolucion").textContent = `Disoluciï¿½n: ${entidad.deathDate}`;
+    if(entidad.wikiUrl === null || entidad.wikiUrl === ""){
+        document.getElementById("wikipedia").src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUzzTNcjuqNynQaX1mu0n_uyJp6-LjgbTqoWCrZzrqFw&s";
+    }else{
+        document.getElementById("wikipedia").src = entidad.wikiUrl;
+    }
 
     mostrarEntidadPersonas(entidad);
 })
