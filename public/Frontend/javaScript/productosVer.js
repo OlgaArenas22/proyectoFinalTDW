@@ -20,41 +20,52 @@ function obtenerProducto() {
 }
 
 
-function mostrarProductoPersonas(producto) {
-    const personas = producto.personas;
+async function mostrarProductoPersonas(producto) {
+    const personas = producto.persons;
 
     const contenedorProductos = document.getElementById("lista-productos-personas");
     contenedorProductos.innerHTML = "";
 
+    for(let i = 0; i < personas.length; i++){
+    await fetch(`http://127.0.0.1:8000/api/v1/persons/${personas[i]}`,{
 
-    personas.forEach(function (persona, index) {
-        const personaElemento = document.createElement("div");
-        personaElemento.innerHTML = `
-            <p style="font-size: 25px;"><strong>${index + 1}: ${persona}</strong></p>
+    })
+        .then(response=>{
+            return response.json();
+        })
+        .then(data=>{
+            const personaElemento = document.createElement("div");
+            personaElemento.innerHTML = `
+            <p style="font-size: 25px;"><strong>${data.person.id}: ${data.person.name}</strong></p>
             <hr>
           `;
-        contenedorProductos.appendChild(personaElemento);
-    });
+            contenedorProductos.appendChild(personaElemento);
+        })
+    }
 
 }
 
-function mostrarProductEntidades(producto) {
-    const entidades = producto.entidades;
+async function mostrarProductEntidades(producto) {
+    const entidades = producto.entities;
 
     const contenedorProductos = document.getElementById("lista-productos-entidades");
     contenedorProductos.innerHTML = "";
 
+    for(let i = 0; i < entidades.length; i++){
+        await fetch(`http://127.0.0.1:8000/api/v1/entities/${entidades[i]}`,{
 
-    entidades.forEach(function (entidad, index) {
-        const entidadElemento = document.createElement("div");
-        entidadElemento.innerHTML = `
-            <p style="font-size: 25px;"><strong>${index + 1}: ${entidad}</strong></p>
+        })
+            .then(response=>{
+                return response.json();
+            })
+            .then(data=>{
+                const entidadElemento = document.createElement("div");
+                entidadElemento.innerHTML = `
+            <p style="font-size: 25px;"><strong>${data.entity.id}: ${data.entity.name}</strong></p>
             <hr>
           `;
-
-        contenedorProductos.appendChild(entidadElemento);
-    });
-
-
+                contenedorProductos.appendChild(entidadElemento);
+            })
+    }
 }
 

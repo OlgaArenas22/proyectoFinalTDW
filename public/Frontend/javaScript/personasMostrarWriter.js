@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             let deathDate = person.deathDate ? person.deathDate : "Actualidad";
 
             personaElemento.innerHTML = `
-                <a href="personasMostrarWriter.html" onclick="llamarFuncionPersona(${person.id})" data-persona="${person.id}" class="linkIndex"><strong>${person.id + 1}: ${person.name}</strong></a>
+                <a href="personasMostrarWriter.html" onclick="llamarFuncionPersona(${person.id})" data-persona="${person.id}" class="linkIndex"><strong>${person.id}: ${person.name}</strong></a>
                 <br>
                 <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
                 <p>${person.birthDate} - ${deathDate}</p>

@@ -18,20 +18,28 @@ function obtenerEntidad() {
 }
 
 
-function mostrarEntidadPersonas(entidad) {
-    const personas = entidad.personas;
+async function mostrarEntidadPersonas(entidad) {
+    const personas = entidad.persons;
 
     const contenedorEntidades = document.getElementById("lista-entidades-personas");
     contenedorEntidades.innerHTML = "";
 
+    for(let i = 0; i < personas.length; i++){
+        await fetch(`http://127.0.0.1:8000/api/v1/persons/${personas[i]}`,{
 
-    personas.forEach(function (persona, index) {
-        const personaElemento = document.createElement("div");
-        personaElemento.innerHTML = `
-            <p style="font-size: 25px;"><strong>${index + 1}: ${persona}</strong></p>
+        })
+            .then(response=>{
+                return response.json();
+            })
+            .then(data=>{
+                const personaElemento = document.createElement("div");
+                personaElemento.innerHTML = `
+            <p style="font-size: 25px;"><strong>${data.person.id}: ${data.person.name}</strong></p>
             <hr>
           `;
-        contenedorEntidades.appendChild(personaElemento);
-    });
+                contenedorEntidades.appendChild(personaElemento);
+            })
+    }
 
 }
+

@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             let deathDate = entity.deathDate ? entity.deathDate : "Actualidad";
 
             entidadElemento.innerHTML = `
-                <a href="entidadesMostrarReader.html" onclick="llamarFuncionEntidades(${entity.id})" data-entity="${entity.id}" class="linkIndex"><strong>${entity.id + 1}: ${entity.name}</strong></a>
+                <a href="entidadesMostrarReader.html" onclick="llamarFuncionEntidades(${entity.id})" data-entity="${entity.id}" class="linkIndex"><strong>${entity.id}: ${entity.name}</strong></a>
                 <br>
                 <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
                 <p>${entity.birthDate} - ${deathDate}</p>
