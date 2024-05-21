@@ -10,6 +10,10 @@ function redirectsIndexWriter(){
     window.location.href = "indexWriter.html";
 }
 
+function redirectsMostrarUsuario(){
+    window.location.href = "mostrarUsuario.html";
+}
+
 function redirectsCrearPersona(){
     window.location.href = "crearPersona.html";
 }

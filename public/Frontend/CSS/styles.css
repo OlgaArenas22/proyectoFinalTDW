@@ -411,6 +411,10 @@ button {
     border: none;
 }
 
+.datosUser{
+    margin-right: 30%;
+}
+
     .login, .logout, #idUser {
         padding: 5px;
         margin: 5px;
@@ -419,7 +423,7 @@ button {
         background: linear-gradient(to bottom right, #800080, #9370DB);
         color: #fff;
         cursor: pointer;
-        width: 100px;
+        width: 120px;
         height: 25px;
     }
 

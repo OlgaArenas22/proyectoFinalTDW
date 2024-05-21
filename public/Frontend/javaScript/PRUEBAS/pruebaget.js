@@ -1,20 +1,15 @@
 async function prueba() {
-    const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJ0ZHctdXBtIiwiaWF0IjoxNzE2MTk4NDA4LjU1OTM4Mywic3ViIjoiYSIsImp0aSI6IjYyZjE0ZjVjLWU0NGUtNGQ5YS05ZWY2LWVlZjk5MGRhZDQ1ZCIsIm5iZiI6MTcxNjE5ODQwOC41NTkzODMsImV4cCI6MTcxNjIxMjgwOC41NTkzODMsImF1ZCI6InVwbS10ZHctYWNpZW5jaWEiLCJ1aWQiOjksInNjb3BlcyI6WyJyZWFkZXIiLCJ3cml0ZXIiXX0.dzOmvr-XIqg2Xxlk-DCOQZTEB62d9L3q1gJ6n3cZ6UjjtfHOrNXcFr9kFMSaShC-B6OAp5AKcB7MXZvwZ-S9BTIIxGqJEj_2h6FKUY1bHUt2ERG7XU_tMVGv-j0FCvWPwZ-ivWfEyR1v0TOiYWhqenIbtqhioe5gmdu_kz4MsGT6ieLHDpoef8eRnd8-Tdzf7CKCoqIOAbgKU6Kxo3GUzbs_5t6i5ihmagPFJU4Ru4VUhqJ5eTTW4Vlaf3qBIELNQ1KYRASRtUD2Z9GE_5QQGBgEokwE2AzVZ4UpY9aECEkS7zuPP90pYqSVdeNfoWA8zzLUthE27rUb-tJ1o_MGyBrrD6rVQ757cbJOELHTwUjdL7ul2rcQBWv41z_ARw0a0tockw64l-MuPo7YxO6lxzIo7bwJ5mVtedpsqoHuOjsjUKKhHl9nP7mw75jpQVlUNjcTFJJ6yTz8phtcoFQ9GDrYv_XaApbM8Gs7RroSZX0OvOwc4ZOaBcJOPVHTIcQexj0TxJF5NS1cYQ3RA5nOgEgy9iHgVSO_5btBrJytwL6DtuLvRqqVidNkqnOYDjtXypHuipH-sRUBqrApbfv4cO1zO5BODOEoaMu1mL4FCiXITF0SuOr5YC3mjbFiaUK_Y0WsVK1K7XLwBDv-5ch9L5wW12kkOEJoLyugOxuZNnM";
-    const name = "2";
+    const token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJ0ZHctdXBtIiwiaWF0IjoxNzE2Mjk5MTU2LjA2NzcyNCwic3ViIjoiYnMwMzEzIiwianRpIjoiNmUzOTc0YmUtOTRlMS00N2YyLTkwZDItNGRjYzUyNzYyNWRmIiwibmJmIjoxNzE2Mjk5MTU2LjA2NzcyNCwiZXhwIjoxNzE2MzEzNTU2LjA2NzcyNCwiYXVkIjoidXBtLXRkdy1hY2llbmNpYSIsInVpZCI6MTAsInNjb3BlcyI6WyJyZWFkZXIiXX0.dRYIpl_ThNiLwRhfFu6EG8SozXc-dz1SDTvLYYnmdWMhFesWNTX-ILO1egN-1EMEOWnyCB3hl0hZwMfjmrvtCOz7853uzt705RP2PIy9Q0c0YRtn958Wpn6Bu-Uk5jwyIQICaEyV8JcAysq1ms7d15cHcX3pW5lcVuL43pBrLPMAkMnhYmdFCiwjxqax1SXdp24yOyk7sMzVVxzLQPCtKMoJFjfB-XSQYklI9gvXt6zaGxKPKZl66Q39HwcD7UzyWeyIo8ANZDTM59bMzZ3rEunSuEYduixGASCSs691eVG4zh3jw2t9Ni3G6pXdjigQLPD4Tk6vnh00yhEosDCbr1Ttrc3n_4mlEbGq_zTxI54ZHK6Fh6rSDA9FEkOy-A25FHL2N45tTNT54rEOAbOEprpVztW8nP7UFXLyO5PrZuMI7K7igtoD_2Ij0Z2NDESO-SNTrzT3ziB_HBPf9zyBqGFwvYWWoKl8ItrMEcPfWwmuqE0StFdf4C6jeU7n5yELGb7bJIrb9CRu8Zyu0ttu5fKRHW_S-fG5o_ce2lkT193LeLo27ypZD4t-lUfC57TB-BQtYW-vaTIF19mg7Uut0ZHW8EWhpKGbQUwTMhQ0KPF8yG4zwhIHRwpgUWeHQu5zkFuYeVx-UNhxlJaJ1BjlmocyRKwPmW1eG1LhBOD1iAI";
+    const user = "10";
 
-    const response = await fetch("http://127.0.0.1:8000/api/v1/products",{
+    const response = await fetch(`http://127.0.0.1:8000/api/v1/users/${user}`,{
 
     });
 
     const data = await response.json();
     const productos = data.products;
-    console.log(productos);
+    console.log(data);
 
-    for(let i = 0; i <= productos.length; i++){
-
-        console.log(productos[i].name);
-        console.log(productos[i].id);
-    }
 }
 
 
