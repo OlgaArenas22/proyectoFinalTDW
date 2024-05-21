@@ -11,66 +11,29 @@
 </head>
 
 <body>
-    <!-- HEADER -->
-    <header>
-        <div id="inicio" class="header-top">
-            <h1 style="margin-right: auto; font-family: 'spaceranger'; color: white; margin-left: 30px;">Anales de la ciencia 𝛑</h1>
-            <form id="user" class="form-inline">
-                <input type="text" id="usuario" name="username" placeholder="Usuario" required>
-                <input type="password" id="contrasenia" name="password" placeholder="Contraseña" required>
-                <button type="submit" id="loginButton" class="login">Iniciar sesión</button>
-                <button class="login" onclick="redirectsRegistro()">Registrarse</button>
-            </form>
-        </div>
-        <div class="header-image">
-        </div>
-        <div class="header-menu">
-            <nav>
-                <ul class="inline-li">
-                    <li>
-                        <a href="#personas">Personas</a>
-                    </li>
-                    <li>
-                        <a href="#entidades">Entidades</a>
-                    </li>
-                    <li>
-                        <a href="#productos">Productos</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- CUERPO DE LA PÁGINA -->
-    <div class="cuerpo-pagina">
-        <!-- DIV PERSONAS -->
-        <div id="personas">
-            <div class="elementos">
-                <h2 style="margin-right: 10px">Personas</h2>
-            </div>
-            <div id="lista-personas" class="lista-elementos"></div>
-        </div>
-
-        <!-- DIV ENTIDADES -->
-        <div id="entidades">
-            <div class="elementos">
-                <h2 style="margin-right: 10px">Entidades</h2>
-            </div>
-            <div id="lista-entidades" class="lista-elementos"></div>
-        </div>
-
-        <!-- DIV PRODUCTOS -->
-        <div id="productos">
-            <div class="elementos">
-                <h2 style="margin-right: 10px">Productos</h2>
-            </div>
-            <div id="lista-productos" class="lista-elementos"></div>
-        </div>
+<!-- HEADER -->
+<header>
+    <div id="inicio" class="top">
+        <h1 style="font-family: 'spaceranger'; color: white;">Anales de la ciencia 𝛑</h1>
     </div>
-
-    <div class="bottom">
-        <p>UPM ETSISI ©</p>
-        <img src="images/Flag_of_Extremadura,_Spain_(with_coat_of_arms).svg.png" alt="Imagen pequeña" class="imagenBottom">
+    <div id="banner">
+        <h2>Crear usuario</h2>
     </div>
+</header>
+
+<!-- CUERPO DE LA PÁGINA -->
+<div class="container-persona">
+    <p class="formularios">Inicie sesión o regístrese</p>
+    <form id="user" class="form-center">
+        <input type="text" id="usuario" name="username" placeholder="Usuario" required>
+        <input type="password" id="contrasenia" name="password" placeholder="Contraseña" required>
+        <button type="submit" id="loginButton" class="login">Iniciar sesión</button>
+        <button class="btn-cancel-submit" onclick="redirectsRegistro()">Registrarse</button>
+    </form>
+</div>
+<div class="bottom">
+    <p>UPM ETSISI ©</p>
+    <img src="images/Flag_of_Extremadura,_Spain_(with_coat_of_arms).svg.png" alt="Imagen pequeña" class="imagenBottom">
+</div>
 </body>
 </html>

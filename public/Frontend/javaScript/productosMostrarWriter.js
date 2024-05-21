@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             let deathDate = product.deathDate ? product.deathDate : "Actualidad";
 
             productoElemento.innerHTML = `
-                <a href="productosMostrar.html" class="linkIndex" data-producto="${product.id}"><strong>${product.id}: ${product.name}</strong></a>
+                <a href="productosMostrarWriter.html" class="linkIndex" data-producto="${product.id}"><strong>${product.id}: ${product.name}</strong></a>
                 <br>
                 <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
                 <p>${product.birthDate} - ${deathDate}</p>
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 const productId = this.getAttribute('data-producto');
                 llamarFuncionProducto(productId).then(() => {
                     // Redirigir a la página después de que se complete la función
-                    window.location.href = 'productosMostrar.html';
+                    window.location.href = 'productosMostrarWriter.html';
                 });
             });
         });
