@@ -411,7 +411,7 @@ button {
     border: none;
 }
 
-    .login, .logout {
+    .login, .logout, #idUser {
         padding: 5px;
         margin: 5px;
         border-radius: 5px;

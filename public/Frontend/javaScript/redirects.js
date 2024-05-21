@@ -2,6 +2,14 @@ function redirectsCrearProducto(){
     window.location.href = "crearProducto.html";
 }
 
+function redirectsIndexReader(){
+    window.location.href = "indexReader.html";
+}
+
+function redirectsIndexWriter(){
+    window.location.href = "indexWriter.html";
+}
+
 function redirectsCrearPersona(){
     window.location.href = "crearPersona.html";
 }
@@ -41,5 +49,6 @@ function redirectsRegistro(){
 
 function redirectsIndex(){
     sessionStorage.removeItem('access_token');
+    sessionStorage.removeItem('idUser');
     window.location.href = "index.html";
 }

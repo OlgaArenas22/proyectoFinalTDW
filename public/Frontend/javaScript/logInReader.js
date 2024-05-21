@@ -53,6 +53,7 @@ this.loginButton.addEventListener('click', async (event)=>{
             sessionStorage.setItem('access_token', token);
             window.location.href = "indexWriter.html";
         } else {
+            sessionStorage.setItem('idUser', usersData.users[id].user.id);
             window.location.href = "indexReader.html";
         }
 
