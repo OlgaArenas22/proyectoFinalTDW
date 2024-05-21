@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 event.preventDefault();
                 const entityId = this.getAttribute('data-entity');
                 await llamarFuncionEntidad(entityId);
-                window.href.location = "entidadesMostrar.html";
+                window.location.href = "entidadesMostrar.html";
 
             });
         });
