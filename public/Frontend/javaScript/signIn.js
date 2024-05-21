@@ -14,6 +14,8 @@ this.crearUsuario.addEventListener("click", async(event ) =>{
                 if (response.ok) {
                     alert("Usuario creado");
                     window.location.href = "index.html";
+                }else if(response.status === 400){
+                    alert("El nombre de usuario o email ya está/n en uso");
                 } else {
                     alert("Error en la solicitud");
                 }

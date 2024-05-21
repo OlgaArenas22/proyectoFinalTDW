@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="CSS/styles.css">
+    <title>Anales de la ciencia</title>
+    <script src="javaScript/redirects.js" defer></script>
+    <script src="javaScript/gestionUsuarios.js" defer></script>
+</head>
+<body>
+<!-- HEADER -->
+<header>
+    <div id="inicio" class="top">
+        <h1 style="font-family: 'spaceranger'; color: white;">Anales de la ciencia 𝛑</h1>
+    </div>
+    <div id="banner">
+        <h2>Gestión de usuarios</h2>
+    </div>
+</header>
+
+<!-- CUERPO DE LA PÁGINA -->
+<div class="container-persona">
+    <p class="formularios">Escoja un usuario</p>
+    <form id="usuario" class="form-center">
+        <select id="Usuarios" multiple></select>
+        <button type="submit" id="borrarUsuario" style="margin: 10px 5px;">Borrar usuario</button>
+        <button type="submit" id="hacerWriter" style="margin: 10px 5px;">Convertir en Writer</button>
+        <button type="submit" id="hacerReader" style="margin: 10px 5px;">Convertir en Reader</button>
+        <button type="button" class="btn-cancel-submit" onclick="redirectsIndexWriter()">Cancelar y volver</button>
+    </form>
+</div>
+
+<div class="bottom">
+    <p>UPM ETSISI ©</p>
+    <img src="images/Flag_of_Extremadura,_Spain_(with_coat_of_arms).svg.png" alt="Imagen pequeña" class="imagenBottom">
+</div>
+</body>
+</html>

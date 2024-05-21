@@ -6,6 +6,10 @@ function redirectsIndexReader(){
     window.location.href = "indexReader.html";
 }
 
+function redirectsGestionUsuarios(){
+    window.location.href = "gestionUsuarios.html";
+}
+
 function redirectsIndexWriter(){
     window.location.href = "indexWriter.html";
 }

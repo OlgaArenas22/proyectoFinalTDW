@@ -429,7 +429,7 @@ button {
 
  button[type="submit"],button[type="button"], .btn-submit{
     background: black;
-    width: 120px;
+    width: 140px;
  }
 
 .btn-cancel-submit {
