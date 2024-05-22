@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             let deathDate = person.deathDate ? person.deathDate : "Actualidad";
 
             personaElemento.innerHTML = `
-                <a href="personasMostrarReader.html" onclick="llamarFuncionPersona(${person.id})" data-persona="${person.id}" class="linkIndex"><strong>${person.id}: ${person.name}</strong></a>
+                <a href="personasMostrarReader.html" onclick="llamarFuncionPersona(${person.id})" data-persona="${person.id}" class="linkIndexPersona"><strong>${person.id}: ${person.name}</strong></a>
                 <br>
                 <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
                 <p>${person.birthDate} - ${deathDate}</p>
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         // Agregar event listener a los enlaces después de que se han agregado al DOM
-        document.querySelectorAll('.linkIndex').forEach(link => {
+        document.querySelectorAll('.linkIndexPersona').forEach(link => {
             link.addEventListener('click', async function(event) {
                 event.preventDefault(); // Evitar que se siga el enlace
                 const personId = this.getAttribute('data-persona');

@@ -6,33 +6,32 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const select = document.getElementById('entitySelect');
-    const entidades = JSON.parse(localStorage.getItem("entidades")) || [];
-
-    entidades.forEach(producto => {
-        const option = document.createElement('option');
-        option.value = producto.id;
-        option.textContent = producto.nombre;
-        select.appendChild(option);
-    });
+    obtenerEntidades();
 
 
-    function obtenerEntidadesSeleccionado() {
-        return entidades[select.selectedIndex - 1];
+
+    async function obtenerEntidadesSeleccionado() {
+        const id = select.selectedOptions[0].value;
+        const response = await fetch(`http://127.0.0.1:8000/api/v1/entities/${id}`);
+        const data = await response.json();
+        return data.entity;
     }
 
+
     // Escuchar el evento change del select
-    select.addEventListener('change', function () {
-        const opcionSeleccionada = obtenerEntidadesSeleccionado()
+    select.addEventListener('change', async function () {
+        const opcionSeleccionada = await obtenerEntidadesSeleccionado();
         document.getElementById('entityForm').reset();
         vaciaElemento(document.getElementById("PersonasEntidad"));
 
-        // Rellenar el formulario con la información del producto seleccionado
-        document.getElementById('name').value = opcionSeleccionada.nombre;
-        document.getElementById('start').value = opcionSeleccionada.inicio;
-        document.getElementById('end').value = opcionSeleccionada.final;
-        document.getElementById('url').value = opcionSeleccionada.url;
-        document.getElementById('image').value = opcionSeleccionada.imagen;
+        // Rellenar el formulario con la informaciï¿½n del producto seleccionado
+        document.getElementById('name').value = opcionSeleccionada.name;
+        document.getElementById('birthDate').value = opcionSeleccionada.birthDate;
+        document.getElementById('deathDate').value = opcionSeleccionada.deathDate;
+        document.getElementById('wikiUrl').value = opcionSeleccionada.wikiUrl;
+        document.getElementById('imageUrl').value = opcionSeleccionada.imageUrl;
         buildPersonas();
+        sessionStorage.setItem("idEntidad", opcionSeleccionada.id);
 
         // Si se selecciona una opcion diferente de "selecionaUnProducto" se habilita el boton
         if(select.selectedIndex > 0){
@@ -43,64 +42,100 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Escuchar el evento submit del formulario
-    document.getElementById('entityForm').addEventListener('submit', function (event) {
+    document.getElementById('entityForm').addEventListener('submit', async function (event) {
         event.preventDefault();
 
-
-        const nombre = document.getElementById('name').value;
-        const start = document.getElementById('start').value;
-        const end = document.getElementById('end').value;
-        const url = document.getElementById('url').value;
-        const imagen = document.getElementById('image').value;
-        const personas = takePersonas();
-
-
-        const nuevasEntidades = eliminaEntidad(select.selectedIndex - 1)
-        agregarEntidad(nuevasEntidades, nombre, start, end, url, imagen, personas)
-
-        alert("Entidad modificado")
-        event.preventDefault();
-        document.location.href = "indexWriter.html";
-    });
-
-    function eliminaEntidad(indiceAEliminar){
-        return [...entidades.slice(0,indiceAEliminar), ...entidades.slice(indiceAEliminar+=1, entidades.lenght)]
-    }
-
-    function buildPersonas() {
-        const personasSeleccionadas = obtenerEntidadesSeleccionado().personas;
-
-        const elemento = document.getElementById("PersonasEntidad");
-
-        const personas = JSON.parse(localStorage.getItem("personas")) || []
-
-        for (const persona of personas) {
-            const opcion = document.createElement("option");
-
-            opcion.value = persona.nombre;
-
-            opcion.textContent = persona.nombre;
-
-            // Marcar la opción como seleccionada si está en el array personasSeleccionadas
-            if (personasSeleccionadas.includes(persona.nombre)) {
-                opcion.selected = true;
+        const idEntidad = sessionStorage.getItem("idEntidad");
+        sessionStorage.removeItem("idEntidad");
+        const etag = await obtenerEtag(idEntidad);
+        const token = sessionStorage.getItem("access_token");
+        const form = document.getElementById("entityForm");
+        const formData = new FormData(form);
+        for (const [key, value] of formData.entries()) {
+            console.log(key, value);
+        }
+        await fetch(`http://127.0.0.1:8000/api/v1/entities/${idEntidad}`,{
+            method: 'PUT',
+            body: formData,
+            headers: {
+                'Authorization': `Bearer ${token}`,
+                "If-Match": `${etag}`
             }
 
-            // Agregar la opción al elemento select
-            elemento.appendChild(opcion);
+        })
+            .then(response=>{
+                if(response.ok){
+                    takePersonas(idEntidad);
+                    alert("Entidad modificada");
+                    window.location.href = "editarEntidad.html";
+                }
+            })
+
+    });
+
+    async function obtenerEtag(idEntidad) {
+        try {
+            const response = await fetch(`http://127.0.0.1:8000/api/v1/entities/${idEntidad}`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const headers = response.headers;
+            const etag = headers.get('etag');
+            return etag;
+        } catch (error) {
+            console.error('Error al obtener el ETag:', error);
+            throw error; // Lanza el error para que pueda ser manejado por quien llame la funciÃ³n
         }
     }
 
-    function takePersonas(){
+    async function buildPersonas() {
+        const elemento = document.getElementById('PersonasEntidad');
+        await fetch("http://127.0.0.1:8000/api/v1/persons", {
+
+        })
+            .then(response =>{
+                if(!response.ok){
+                    console.log("No hay personas");
+                }else{
+                    return response.json();
+                }
+            })
+            .then(data =>{
+                if(data != undefined){
+                    const personas = data.persons;
+                    for(const person of personas){
+                        const option = document.createElement("option");
+                        option.value = person.person.id;
+                        option.textContent = person.person.name;
+                        elemento.appendChild(option);
+                    }
+                }
+            });
+    }
+
+    function takePersonas(idEntidad){
         const select = document.getElementById("PersonasEntidad");
         const respuestas = select.selectedOptions;
-        const personas = [];
-        for (let i = 0; i < respuestas.length; i++){
-            personas.push(respuestas[i].label);
+
+        for(let i = 0; i < respuestas.length; i++){
+            let idPersona = respuestas[i].value;
+            aniadirRelacionPersona(idPersona, idEntidad);
         }
-        return personas;
     }
 })
+
+async function aniadirRelacionPersona(idPersona, idEntidad){
+    const token = sessionStorage.getItem("access_token");
+
+    await fetch(`http://127.0.0.1:8000/api/v1/entities/${idEntidad}/persons/add/${idPersona}`,{
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    })
+}
 
 function vaciaElemento(elemento){
     while (elemento.firstChild) {
@@ -108,12 +143,21 @@ function vaciaElemento(elemento){
     }
 }
 
+async function obtenerEntidades(){
+    const select = document.getElementById('entitySelect');
+    await fetch('http://127.0.0.1:8000/api/v1/entities',{
 
+    })
+        .then(response=>{
+            return response.json();
+        })
+        .then(data=>{
+            for(let i = 0; i < data.entities.length; i++){
+                const option = document.createElement('option');
+                option.value = data.entities[i].entity.id;
+                option.textContent = data.entities[i].entity.name;
+                select.appendChild(option);
+            }
+        })
 
-
-
-function agregarEntidad(entidades, nombre, inicio, fin, url, imagen, personas) {
-    const newE = new Entidad(nombre, inicio, fin, url, imagen, personas);
-    entidades.push(newE);
-    localStorage.setItem('entidades', JSON.stringify(entidades));
 }

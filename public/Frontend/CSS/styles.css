@@ -55,7 +55,7 @@ html, body {
     border: 3px solid white;
 }
 
-.linkIndex {
+.linkIndexPersona, .linkIndexProducto, .linkIndexEntidad {
    font-size: 25px;
    color:white;
 }

@@ -2,18 +2,26 @@ document.addEventListener("DOMContentLoaded", function () {
     // Cuando se hace click en crearProducto...
     document.getElementById("borrarUsuario").addEventListener("click", async event => {
         event.preventDefault();
-        takeUsarios();
+        const id = await takeUsarios();
+        eliminarUsuario(id);
 
     });
     // Cuando se hace click en volverWriter ...
     document.getElementById("hacerReader").addEventListener("click", async event => {
         event.preventDefault();
-        hacerReader();
+        const id = takeUsarios();
+        hacerReader(id);
 
     });
     document.getElementById("hacerWriter").addEventListener("click", async event => {
         event.preventDefault();
         hacerWriter();
+
+    });
+
+    document.getElementById("convertirInactivo").addEventListener("click", async event => {
+        event.preventDefault();
+        convertirInactivo();
 
     });
 
@@ -55,10 +63,60 @@ function takeUsarios(){
     const select = document.getElementById("Usuarios");
     const respuestas = select.selectedOptions;
 
+    let idUsuario = -1;
     for(let i = 0; i < respuestas.length; i++){
-        let idUsuario = respuestas[i].value;
-        eliminarUsuario(idUsuario);
+        idUsuario = respuestas[i].value;
     }
+
+    return idUsuario;
+}
+
+async function obtenerEtag(id) {
+    try {
+        const token = sessionStorage.getItem("access_token");
+        const response = await fetch(`http://127.0.0.1:8000/api/v1/users/${id}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const headers = response.headers;
+        const etag = headers.get('etag');
+        return etag;
+    } catch (error) {
+        console.error('Error al obtener el ETag:', error);
+        throw error; // Lanza el error para que pueda ser manejado por quien llame la función
+    }
+}
+async function hacerReader(id){
+    const token = sessionStorage.getItem("access_token");
+    const etag = await obtenerEtag(id);
+    const usuario = await obtenerUsuario(id);
+    const formData = new FormData;
+    formData.set("role", "READER");
+
+    const datosUsuario = Object.fromEntries(formData);
+    const datosUsuarioJson = JSON.stringify(datosUsuario);
+
+    await fetch(`http://127.0.0.1:8000/api/v1/users/${id}`,{
+        method: 'PUT',
+        body: datosUsuarioJson,
+        headers: {
+            'Content-Type': 'application/json;charset=UTF-8',
+            'Authorization': `Bearer ${token}`,
+            "If-Match": `${etag}`
+        }
+    })
+        .then(response=>{
+            if(response.ok){
+                alert("Rol cambiado con éxito");
+            }
+        })
 }
 
 async function eliminarUsuario(id){
@@ -75,4 +133,28 @@ async function eliminarUsuario(id){
                 alert("Usuario eliminado");
             }
         })
+}
+
+async function obtenerUsuario(id){
+    try {
+        const token = sessionStorage.getItem("access_token");
+        const response = await fetch(`http://127.0.0.1:8000/api/v1/users/${id}`,{
+            method: 'GET',
+            headers: {
+                'Authorization': `Bearer ${token}`,
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const usuario = data.user;
+        return usuario;
+    } catch (error) {
+        console.error('Error al obtener el usuario:', error);
+        throw error; // Lanza el error para que pueda ser manejado por quien llame la función
+    }
+
 }

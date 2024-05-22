@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             let deathDate = product.deathDate ? product.deathDate : "Actualidad";
 
             productoElemento.innerHTML = `
-                <a href="productosMostrarReader.html" class="linkIndex" data-producto="${product.id}"><strong>${product.id}: ${product.name}</strong></a>
+                <a href="productosMostrarReader.html" class="linkIndexProducto" data-producto="${product.id}"><strong>${product.id}: ${product.name}</strong></a>
                 <br>
                 <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
                 <p>${product.birthDate} - ${deathDate}</p>
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         // Agregar event listener a los enlaces después de que se han agregado al DOM
-        document.querySelectorAll('.linkIndex').forEach(link => {
+        document.querySelectorAll('.linkIndexProducto').forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault(); // Evitar que se siga el enlace
                 const productId = this.getAttribute('data-producto');

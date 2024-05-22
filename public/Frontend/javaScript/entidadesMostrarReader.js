@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             let deathDate = entity.deathDate ? entity.deathDate : "Actualidad";
 
             entidadElemento.innerHTML = `
-                <a href="entidadesMostrarReader.html" onclick="llamarFuncionEntidades(${entity.id})" data-entity="${entity.id}" class="linkIndex"><strong>${entity.id}: ${entity.name}</strong></a>
+                <a href="entidadesMostrarReader.html" onclick="llamarFuncionEntidades(${entity.id})" data-entity="${entity.id}" class="linkIndexEntidad"><strong>${entity.id}: ${entity.name}</strong></a>
                 <br>
                 <img src="${imageUrl}" width="120" height="120" class="imagenIndex">
                 <p>${entity.birthDate} - ${deathDate}</p>
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             contenedorEntidades.appendChild(entidadElemento);
         });
 
-        document.querySelectorAll('.linkIndex').forEach(link=>{
+        document.querySelectorAll('.linkIndexEntidad').forEach(link=>{
             link.addEventListener('click', async function(event){
                 event.preventDefault();
                 const entityId = this.getAttribute('data-entity');
