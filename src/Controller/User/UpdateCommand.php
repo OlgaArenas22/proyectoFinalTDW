@@ -9,6 +9,7 @@
 
 namespace TDW\ACiencia\Controller\User;
 
+use DateTime;
 use Doctrine\ORM;
 use Fig\Http\Message\StatusCodeInterface as StatusCode;
 use Psr\Http\Message\ServerRequestInterface as Request;
@@ -25,7 +26,7 @@ class UpdateCommand
 {
     use TraitController;
 
-    /** @var string ruta api gestión usuarios  */
+    /** @var string ruta api gestión usuarios */
     public const PATH_USERS = '/users';
 
     // constructor receives container instance
@@ -91,6 +92,27 @@ class UpdateCommand
             $userToModify->setEmail($req_data['email']);
         }
 
+        // Update country
+        if (isset($req_data['country'])) {
+            $userToModify->setCountry($req_data['country']);
+        }
+
+        // Update birthDate
+        if (isset($req_data['birthDate'])) {
+            $date = DateTime::createFromFormat('!Y-m-d', $req_data['birthDate']);
+            if ($date) $userToModify->setBirthDate($date);
+        }
+
+        // Update country
+        if (isset($req_data['imageUrl'])) {
+            $userToModify->setImageUrl($req_data['imageUrl']);
+        }
+
+        // Update password
+        if (isset($req_data['password'])) {
+            $userToModify->setPassword($req_data['password']);
+        }
+
         // Update password
         if (isset($req_data['password'])) {
             $userToModify->setPassword($req_data['password']);
@@ -119,7 +141,7 @@ class UpdateCommand
     private function findIdBy(string $attr, string $value): int
     {
         /** @var User|null $user */
-        $user = $this->entityManager->getRepository(User::class)->findOneBy([ $attr => $value ]);
+        $user = $this->entityManager->getRepository(User::class)->findOneBy([$attr => $value]);
         return $user?->getId() ?? 0;
     }
 }

@@ -9,6 +9,7 @@
 
 namespace TDW\ACiencia\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use InvalidArgumentException;
 use JetBrains\PhpStorm\ArrayShape;
@@ -17,8 +18,8 @@ use Stringable;
 use ValueError;
 
 #[ORM\Entity, ORM\Table(name: "user")]
-#[ORM\UniqueConstraint(name: "IDX_UNIQ_USERNAME", columns: [ "username" ])]
-#[ORM\UniqueConstraint(name: "IDX_UNIQ_EMAIL", columns: [ "email" ])]
+#[ORM\UniqueConstraint(name: "IDX_UNIQ_USERNAME", columns: ["username"])]
+#[ORM\UniqueConstraint(name: "IDX_UNIQ_EMAIL", columns: ["email"])]
 class User implements JsonSerializable, Stringable
 {
     #[ORM\Column(
@@ -49,6 +50,29 @@ class User implements JsonSerializable, Stringable
     protected string $email;
 
     #[ORM\Column(
+        name: "country",
+        type: "string",
+        length: 2047,
+        nullable: true
+    )]
+    protected string|null $country = null;
+
+    #[ORM\Column(
+        name: "birth_date",
+        type: "datetime",
+        nullable: true
+    )]
+    protected DateTime|null $birthDate = null;
+
+    #[ORM\Column(
+        name: "image_url",
+        type: "string",
+        length: 2047,
+        nullable: true
+    )]
+    protected string|null $imageUrl = null;
+
+    #[ORM\Column(
         name: "password",
         type: "string",
         length: 255,
@@ -62,7 +86,7 @@ class User implements JsonSerializable, Stringable
         length: 10,
         nullable: false,
         enumType: Role::class,
-        options: [ 'default' => Role::INACTIVE ]
+        options: ['default' => Role::INACTIVE]
     )]
     protected Role $role;
 
@@ -77,14 +101,21 @@ class User implements JsonSerializable, Stringable
      * @throws InvalidArgumentException
      */
     public function __construct(
-        string $username = '<empty>',
-        string $email = '',
-        string $password = '',
-        Role|string $role = Role::READER
-    ) {
-        $this->id       = 0;
+        string      $username = '<empty>',
+        string      $email = '',
+        string      $password = '',
+        Role|string $role = Role::READER,
+        string      $country = null,
+        string      $birthDate = null,
+        string      $imageUrl = ''
+    )
+    {
+        $this->id = 0;
         $this->username = $username;
-        $this->email    = $email;
+        $this->email = $email;
+        $this->country = $country;
+        $this->birthDate = $birthDate;
+        $this->imageUrl = $imageUrl;
         $this->setPassword($password);
         $this->setRole($role);
     }
@@ -141,6 +172,37 @@ class User implements JsonSerializable, Stringable
     {
         $this->email = $email;
     }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): void
+    {
+        $this->country = $country;
+    }
+
+    public function getBirthDate(): ?DateTime
+    {
+        return $this->birthDate;
+    }
+
+    public function setBirthDate(?DateTime $birthDate): void
+    {
+        $this->birthDate = $birthDate;
+    }
+
+    public function getImageUrl(): ?string
+    {
+        return $this->imageUrl;
+    }
+
+    public function setImageUrl(?string $imageUrl): void
+    {
+        $this->imageUrl = $imageUrl;
+    }
+
 
     /**
      * Get the hashed password
@@ -224,28 +286,25 @@ class User implements JsonSerializable, Stringable
     {
         return
             sprintf(
-                '[%s: (id=%04d, username="%s", email="%s", role="%s")]',
+                '[%s: (id=%04d, username="%s", email="%s", country="%s", birthDate="%s", imageUrl="%s",role="%s")]',
                 basename(self::class),
                 $this->getId(),
                 $this->getUsername(),
                 $this->getEmail(),
+                $this->getCountry(),
+                $this->getBirthDate()?->format('Y-m-d'),
+                $this->getImageUrl(),
                 $this->role->name,
             );
     }
 
     /**
+     *
      * @see JsonSerializable
      */
     #[ArrayShape(['user' => "array"])]
     public function jsonSerialize(): mixed
     {
-        return [
-            'user' => [
-                'id' => $this->getId(),
-                'username' => $this->getUsername(),
-                'email' => $this->getEmail(),
-                'role' => $this->role->name,
-            ]
-        ];
+        return ['user' => ['id' => $this->getId(), 'username' => $this->getUsername(), 'email' => $this->getEmail(), 'country' => $this->getCountry(), 'birthDate' => $this->getBirthDate()?->format('Y-m-d'), 'imageUrl' => $this->getImageUrl(), 'role' => $this->role->name,]];
     }
 }

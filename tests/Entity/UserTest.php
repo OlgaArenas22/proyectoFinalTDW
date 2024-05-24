@@ -82,6 +82,9 @@ class UserTest extends TestCase
         static::assertSame($userEmail, self::$user->getEmail());
     }
 
+    //TODO añadir testGetSetBirthDate
+    //TODO añadir testGetSetImageUrl
+
     public function testRoles(): void
     {
         self::$user->setRole(Role::INACTIVE);
@@ -123,6 +126,13 @@ class UserTest extends TestCase
         self::$user->setPassword($password);
         static::assertTrue(password_verify($password, self::$user->getPassword()));
         static::assertTrue(self::$user->validatePassword($password));
+    }
+
+    public function testGetSetCountry(): void
+    {
+        $country = self::$faker->country();
+        self::$user->setCountry($country);
+        static::assertSame($country, self::$user->getCountry());
     }
 
     #[TestsAttr\Depends('testGetSetUsername')]
